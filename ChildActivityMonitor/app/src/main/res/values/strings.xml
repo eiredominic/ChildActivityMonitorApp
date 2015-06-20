@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Child Activity Monitor</string>
+    <string name="title_activity_carer_home_page">CarerHomePage</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_carer_home">CarerHomeActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_parent_home">ParentHomeActivity</string>
+</resources>
