@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView android:id="@+id/item1"
+        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:text="Ref"
+        android:width="100dip"
+        android:height="30dip"
+        />
+    <TextView android:id="@+id/item2"
+        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:text="Type"
+        android:width="100dip"
+        android:height="30dip"
+        />
+
+    <TextView android:id="@+id/item3"
+        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:text="ChildID"
+        android:width="100dip"
+        android:height="30dip"
+        />
+    <TextView android:id="@+id/item4"
+        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:text="MinderID"
+        android:width="100dip"
+        android:height="30dip"
+        />
+    <TextView android:id="@+id/item5"
+        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:text="Date"
+        android:width="100dip"
+        android:height="30dip"
+        />
+    <TextView android:id="@+id/item6"
+        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:text="Time"
+        android:width="100dip"
+        android:height="30dip"
+        />
+</LinearLayout>

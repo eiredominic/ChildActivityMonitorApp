@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.lenamarie.childactivitymonitor.MinderTabs.MinderActivityWrapper;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -62,7 +64,6 @@ public class MainActivity extends Activity {
         pwdText = (EditText) findViewById(R.id.pwdLogin);
         btnLogin = (Button) findViewById(R.id.mainLoginBtn);
         btnRegister = (Button) findViewById(R.id.mainRegBtn);
-
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -121,8 +122,6 @@ public class MainActivity extends Activity {
             conn.setConnectTimeout(15000 /* milliseconds */);
             conn.setRequestMethod("POST");
             conn.setDoInput(true);
-
-
 
             // Starts the query
             conn.connect();
@@ -197,7 +196,7 @@ public class MainActivity extends Activity {
                     Intent intent = new Intent(MainActivity.this, ParentHomeActivity.class);
                     startActivity(intent);
                 }else if (type.toString().equals("Minder")) {
-                    Intent intent = new Intent(MainActivity.this, MinderHomeActivity.class);
+                    Intent intent = new Intent(MainActivity.this, MinderActivityWrapper.class);
                     startActivity(intent);
                 }
             }
