@@ -14,7 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.lenamarie.childactivitymonitor.MinderTabs.MinderActivityWrapper;
+//import com.example.lenamarie.childactivitymonitor.MinderTabs.MinderActivityWrapper;
+import com.example.lenamarie.childactivitymonitor.ParentTabs.NavigationDrawer.MainParentActivity;
+import com.example.lenamarie.childactivitymonitor.Register.RegisterOneActivity;
+//import com.example.lenamarie.childactivitymonitor.ParentTabs.ParentActivityWrapper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,7 +78,7 @@ public class MainActivity extends Activity {
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(MainActivity.this, RegisterOneActivity.class);
                 startActivity(intent);
             }
         });
@@ -193,12 +196,12 @@ public class MainActivity extends Activity {
             }
             if (type != null) {
                 if (type.toString().equals("Parent")) {
-                    Intent intent = new Intent(MainActivity.this, ParentHomeActivity.class);
+                    Intent intent = new Intent(MainActivity.this, MainParentActivity.class);
                     startActivity(intent);
-                }else if (type.toString().equals("Minder")) {
-                    Intent intent = new Intent(MainActivity.this, MinderActivityWrapper.class);
-                    startActivity(intent);
-                }
+                }//else if (type.toString().equals("Minder")) {
+                  //  Intent intent = new Intent(MainActivity.this, MinderActivityWrapper.class);
+                  //  startActivity(intent);
+                //}
             }
         }
 

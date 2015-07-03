@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.lenamarie.childactivitymonitor.Register.RegisterTwoActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="Please enter a Unique ID"
+        android:gravity="center"
+        android:id="@+id/textView"
+        android:layout_above="@+id/uniqueIdTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="51dp" />
+
+    <EditText
+        android:layout_width="200dip"
+        android:layout_height="40dip"
+        android:id="@+id/uniqueIdTxt"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PREV"
+        android:textSize="25sp"
+        android:id="@+id/btn_back"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:drawableStart="@drawable/ic_back_btn"
+        android:onClick="prevActivity"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_fwd"
+        android:text="NEXT"
+        android:textSize="25sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:focusableInTouchMode="true"
+        android:stateListAnimator="@null"
+        android:drawableEnd="@drawable/ic_fwd_btn"
+        android:onClick="nextActivity"
+        />
+
+
+</RelativeLayout>

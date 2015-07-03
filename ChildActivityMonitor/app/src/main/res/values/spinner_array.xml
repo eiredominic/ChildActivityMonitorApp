@@ -3,6 +3,7 @@
     <string-array name="type_array">
         <item>Parent</item>
         <item>Minder</item>
+        <item>Child</item>
     </string-array>
 
 </resources>

@@ -11,23 +11,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/CustomTheme" >
         <activity
-            android:name=".RegisterActivity"
-            android:label="@string/title_activity_register" >
-        </activity>
-        <activity
+
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
-        </activity>
-        <activity
-            android:name=".ParentHomeActivity"
-            android:label="@string/title_activity_parent_home" >
-        </activity>
-        <activity
-            android:name=".MinderActivity"
-            android:label="@string/title_activity_minder_home"
-            android:screenOrientation="landscape" >
+            android:label="title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,10 +23,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SlidingTabs.MinderHome"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_minder_home"
-            android:theme="@style/FullscreenTheme" >
+            android:name=".ParentTabs.NavigationDrawer.MainParentActivity"
+            android:label="Parent Menu" >
+
+        </activity>
+        <activity
+            android:name=".Register.RegisterOneActivity"
+            android:label="@string/title_activity_register_one" >
+
+        </activity>
+        <activity
+            android:name=".Register.RegisterTwoActivity"
+            android:label="@string/title_activity_register_one" >
+        </activity>
+        <activity
+            android:name=".Register.RegisterThreeActivity"
+            android:label="@string/title_activity_register_three" >
+        </activity>
+        <activity
+            android:name=".Register.RegisterFourActivity"
+            android:label="@string/title_activity_register_four" >
+        </activity>
+        <activity
+            android:name=".Register.RegisterFiveActivity"
+            android:label="@string/title_activity_register_five" >
         </activity>
     </application>
 

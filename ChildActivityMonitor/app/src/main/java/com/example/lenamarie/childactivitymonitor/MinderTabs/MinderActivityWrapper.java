@@ -1,4 +1,4 @@
-package com.example.lenamarie.childactivitymonitor.MinderTabs;
+/*package com.example.lenamarie.childactivitymonitor.MinderTabs;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -61,7 +61,7 @@ public class MinderActivityWrapper extends FragmentActivity implements
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.minder_activity);
+            setContentView(R.layout.activity_minder);
 
             childIdTxt = (EditText) findViewById(R.id.childIdTxt);
             Button goBtn = (Button) findViewById(R.id.goBtn);
@@ -280,3 +280,4 @@ public class MinderActivityWrapper extends FragmentActivity implements
 }
 
 
+*/

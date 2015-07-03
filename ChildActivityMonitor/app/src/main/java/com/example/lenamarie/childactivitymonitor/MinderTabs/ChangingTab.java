@@ -72,7 +72,7 @@ public class ChangingTab extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.changing_fragment, container, false);
+        View v =  inflater.inflate(R.layout.fragment_changing, container, false);
 
 
         return v;

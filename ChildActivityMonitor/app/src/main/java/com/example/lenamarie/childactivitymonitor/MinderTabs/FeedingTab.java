@@ -73,7 +73,7 @@ public class FeedingTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.feeding_fragment, container, false);
+        View v =  inflater.inflate(R.layout.fragment_feeding, container, false);
 
         return v;
     }
