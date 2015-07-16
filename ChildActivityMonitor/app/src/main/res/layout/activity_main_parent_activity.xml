@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="com.example.lenamarie.childactivitymonitor.ParentTabs.NavigationDrawer.MainParentActivity">
 
-    <include layout="@layout/tool_bar"/>
+    <include layout="@layout/toolbar_parent"/>
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"

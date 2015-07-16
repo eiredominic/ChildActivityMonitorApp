@@ -30,12 +30,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class RegisterFiveActivity extends Activity {
-    String account_type;
-    String unique_id;
-    String name;
-    String email_address;
-    String password;
-
+    String account_type, unique_id, name, email_address, password, date, parent_id, address;
     TextView successTxt;
     TextView uniqueIdTxt;
     TextView registrationStatusTxt;
@@ -54,17 +49,21 @@ public class RegisterFiveActivity extends Activity {
         unique_id = intent.getStringExtra("unique_id");
         account_type = intent.getStringExtra("account_type");
         name = intent.getStringExtra("name");
-        email_address = intent.getStringExtra("email_address");
         password = intent.getStringExtra("password");
+        date = intent.getStringExtra("dob");
 
-        if (account_type.equals("Minder")) {
-            url = "https://mkbdesigncouk.ipage.com/monitoractivity/register_minder.php";
-        }
-        else if (account_type.equals("Parent")){
-            url = "https://mkbdesigncouk.ipage.com/monitoractivity/register_parent.php";
-        }
-        else if (account_type.equals("Child")) {
-            url = "https://mkbdesigncouk.ipage.com/monitoractivity/register_child.php";
+        switch (account_type) {
+            case "Minder":
+                email_address = intent.getStringExtra("email_address");
+                url = "https://mkbdesigncouk.ipage.com/monitoractivity/register_minder.php";
+                break;
+            case "Parent":
+                email_address = intent.getStringExtra("email_address");
+                url = "https://mkbdesigncouk.ipage.com/monitoractivity/register_parent.php";
+                break;
+            case "Child":
+                parent_id = intent.getStringExtra("parent_id");
+                url = "https://mkbdesigncouk.ipage.com/monitoractivity/register_child.php";
         }
 
         new DownloadWebpageTask().execute(url);
@@ -126,12 +125,31 @@ public class RegisterFiveActivity extends Activity {
 
             OutputStream out = conn.getOutputStream();
             OutputStreamWriter writer = new OutputStreamWriter(out);
-            writer.append("unique_id=").append(URLEncoder.encode(unique_id, "UTF-8")).append("&");
-            writer.append("name=").append(URLEncoder.encode(name, "UTF-8")).append("&");
-            writer.append("password=").append(URLEncoder.encode(password, "UTF-8")).append("&");
-            writer.append("email=").append(URLEncoder.encode(email_address, "UTF-8")).append("&");
-            writer.append("type=").append(URLEncoder.encode(account_type, "UTF-8"));
-
+            if (account_type.equals("Child")) {
+                writer.append("unique_id=").append(URLEncoder.encode(unique_id, "UTF-8")).append("&");
+                writer.append("name=").append(URLEncoder.encode(name, "UTF-8")).append("&");
+                writer.append("password=").append(URLEncoder.encode(password, "UTF-8")).append("&");
+                writer.append("dob=").append(URLEncoder.encode(date, "UTF-8")).append("&");
+                writer.append("type=").append(URLEncoder.encode(account_type, "UTF-8"));
+                writer.append("linked_id=").append(URLEncoder.encode(parent_id, "UTF-8"));
+            }
+            if (account_type.equals("Parent")) {
+                writer.append("unique_id=").append(URLEncoder.encode(unique_id, "UTF-8")).append("&");
+                writer.append("name=").append(URLEncoder.encode(name, "UTF-8")).append("&");
+                writer.append("password=").append(URLEncoder.encode(password, "UTF-8")).append("&");
+                writer.append("email=").append(URLEncoder.encode(email_address, "UTF-8")).append("&");
+                writer.append("dob=").append(URLEncoder.encode(email_address, "UTF-8")).append("&");
+                writer.append("address=").append(URLEncoder.encode(address, "UTF-8")).append("&");
+                writer.append("type=").append(URLEncoder.encode(account_type, "UTF-8"));
+            }
+            if (account_type.equals("Minder")) {
+                writer.append("unique_id=").append(URLEncoder.encode(unique_id, "UTF-8")).append("&");
+                writer.append("name=").append(URLEncoder.encode(name, "UTF-8")).append("&");
+                writer.append("password=").append(URLEncoder.encode(password, "UTF-8")).append("&");
+                writer.append("dob=").append(URLEncoder.encode(email_address, "UTF-8")).append("&");
+                writer.append("email=").append(URLEncoder.encode(email_address, "UTF-8")).append("&");
+                writer.append("type=").append(URLEncoder.encode(account_type, "UTF-8"));
+            }
             writer.flush();
 
             int response = conn.getResponseCode();

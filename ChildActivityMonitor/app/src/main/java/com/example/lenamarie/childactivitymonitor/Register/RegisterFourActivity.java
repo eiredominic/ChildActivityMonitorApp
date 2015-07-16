@@ -15,9 +15,11 @@ public class RegisterFourActivity extends Activity {
     String account_type;
     String unique_id;
     String name;
+    String date;
     String email_address;
     String password;
     String passwordRepeat;
+    String address;
 
     EditText passwordTxt;
     EditText passwordTxtRepeat;
@@ -34,7 +36,12 @@ public class RegisterFourActivity extends Activity {
         account_type = intent.getStringExtra("account_type");
         unique_id = intent.getStringExtra("unique_id");
         name = intent.getStringExtra("name");
+        date = intent.getStringExtra("dob");
         email_address = intent.getStringExtra("email_address");
+
+        if (account_type.equals("Parent")) {
+            address = intent.getStringExtra("address");
+        }
 
     }
     public boolean passwordCheck() {
@@ -52,13 +59,22 @@ public class RegisterFourActivity extends Activity {
 
     /** Called when the user clicks the Prev button */
     public void prevActivity(View view) {
+        Intent intent;
 
+        if (account_type.equals("Child")) {
+            intent = new Intent(this, RegisterTwoActivity.class);
 
-        Intent intent = new Intent(this, RegisterThreeActivity.class);
+        }
+        else {
+            intent = new Intent(this, RegisterThreeActivity.class);
+        }
         intent.putExtra("account_type", account_type);
         intent.putExtra("unique_id", unique_id);
         intent.putExtra("name", name);
-
+        intent.putExtra("dob", date);
+        if (account_type.equals("Parent")) {
+            intent.putExtra("address", address);
+        }
         startActivity(intent);
 
     }
@@ -70,10 +86,14 @@ public class RegisterFourActivity extends Activity {
             intent.putExtra("account_type", account_type);
             intent.putExtra("unique_id", unique_id);
             intent.putExtra("name", name);
-
-            intent.putExtra("email_address", email_address);
+            intent.putExtra("dob", date);
             intent.putExtra("password", password);
-
+            if (!account_type.equals("Child")) {
+                intent.putExtra("email_address", email_address);
+            }
+            if (account_type.equals("Parent")) {
+                intent.putExtra("address", address);
+            }
             startActivity(intent);
 
         }

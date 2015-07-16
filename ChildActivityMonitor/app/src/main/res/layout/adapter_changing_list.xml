@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/horizontalScrollView"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+
+
 
     <TextView android:id="@+id/item1"
         android:layout_height="fill_parent"
@@ -47,4 +55,5 @@
         android:width="100dip"
         android:height="30dip"
         />
-</LinearLayout>
+    </LinearLayout>
+</HorizontalScrollView>

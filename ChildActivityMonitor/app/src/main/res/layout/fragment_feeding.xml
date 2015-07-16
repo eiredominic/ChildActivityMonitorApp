@@ -1,58 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:id="@+id/main"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_height="fill_parent"
-    android:layout_width="fill_parent">
-    <!-- Header -->
+<HorizontalScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/horizontalScrollView2"
+    android:layout_gravity="bottom"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-
-    <LinearLayout android:id="@+id/header"
-    android:background="#ff347c12"
-    android:layout_height="wrap_content"
-    android:layout_width="fill_parent"
-    >
-
-    <TextView android:id="@+id/item1"
+    <LinearLayout android:id="@+id/main"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_height="fill_parent"
-        android:layout_width="wrap_content"
-        android:text="Ref"
-        android:width="100dip"
-        android:height="30dip"
-        />
-    <TextView android:id="@+id/item2"
-        android:layout_height="fill_parent"
-        android:layout_width="wrap_content"
-        android:text="ChildID"
-        android:width="100dip"
-        android:height="30dip"
-        />
-    <TextView android:id="@+id/item3"
-        android:layout_height="fill_parent"
-        android:layout_width="wrap_content"
-        android:text="MinderID"
-        android:width="100dip"
-        android:height="30dip"
-        />
-</LinearLayout>
-
-<!-- List Divider -->
-<View android:layout_width="fill_parent"
-    android:layout_height="1dip"
-    android:background="?android:attr/listDivider" />
-
-<!-- ListView (grid_items) -->
-<LinearLayout android:id="@+id/layout"
-    android:layout_width="wrap_content"
-    android:layout_height="388dp">
-    <ListView android:id="@+id/feedingView"
-        android:layout_height="612dp"
-        android:layout_width="fill_parent">
-    </ListView>
+        android:layout_width="wrap_content">
+        <!-- Header -->
 
 
-</LinearLayout>
+        <LinearLayout android:id="@+id/header"
+        android:background="#ff347c12"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        >
 
-</LinearLayout>
+        <TextView android:id="@+id/item1"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:text="Ref"
+            android:width="100dip"
+            android:height="30dip"
+            />
+        <TextView android:id="@+id/item2"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:text="Child"
+            android:width="100dip"
+            android:height="30dip"
+            />
+        <TextView android:id="@+id/item3"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:text="Minder"
+            android:width="100dip"
+            android:height="30dip"
+            />
+        <TextView android:id="@+id/item4"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:text="Amount"
+            android:width="100dip"
+            android:height="30dip"
+            />
+        <TextView android:id="@+id/item5"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:text="Date"
+            android:width="100dip"
+            android:height="30dip"
+            />
+        <TextView android:id="@+id/item6"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:text="Time"
+            android:width="100dip"
+            android:height="30dip"
+            />
+    </LinearLayout>
 
+    <!-- List Divider -->
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="?android:attr/listDivider" />
+
+    <!-- ListView (grid_items) -->
+    <LinearLayout android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="388dp">
+
+        <ListView android:id="@+id/feedingView"
+            android:layout_height="612dp"
+            android:layout_width="match_parent">
+        </ListView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+</HorizontalScrollView>

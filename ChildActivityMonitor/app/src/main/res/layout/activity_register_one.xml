@@ -1,7 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -17,8 +18,8 @@
         android:gravity="center"
         android:text="Select an account type"
         android:id="@+id/textView5"
-        android:layout_marginTop="124dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal" />
 
 
     <RadioGroup
@@ -29,64 +30,42 @@
         android:gravity="center|center_vertical|center_horizontal"
         android:id="@+id/radioGroup"
         android:layout_below="@+id/textView5"
-        android:layout_centerHorizontal="true">
+        android:layout_gravity="center_horizontal">
 
 
         <RadioButton
-            android:layout_weight="3"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Parent"
             android:textSize="20sp"
             android:id="@+id/radioBtn_parent"
-            android:onClick="onRadioButtonClicked"/>
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp" />
 
 
         <RadioButton
-            android:layout_weight="3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Minder"
             android:textSize="20sp"
             android:id="@+id/radioBtn_minder"
-            android:onClick="onRadioButtonClicked"/>
+            android:onClick="onRadioButtonClicked"
+            android:padding="10dp" />
 
-        <RadioButton
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Child"
-            android:textSize="20sp"
-            android:id="@+id/radioBtn_child"
-            android:onClick="onRadioButtonClicked"/>
     </RadioGroup>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_fwd"
-        android:text="NEXT"
-        android:textSize="25sp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:focusableInTouchMode="true"
-        android:stateListAnimator="@null"
-        android:drawableEnd="@drawable/ic_fwd_btn"
-        android:onClick="nextActivity"
-        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please enter your name"
         android:id="@+id/textView8"
-        android:layout_below="@+id/radioGroup"
         android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
         android:textSize="25dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_gravity="center_horizontal" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -95,7 +74,117 @@
         android:text="Name"
         android:ems="10"
         android:id="@+id/nameTxt"
-        android:layout_below="@+id/textView8"
-        android:layout_centerHorizontal="true" />
+        android:layout_gravity="center_horizontal" />
 
-</RelativeLayout>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/addressLayout"
+    android:visibility="gone"
+    tools:context="com.example.lenamarie.childactivitymonitor.Register.RegisterOneActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please enter home address"
+        android:id="@+id/textView9"
+        android:layout_marginTop="28dp"
+        android:textSize="25dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_gravity="center_horizontal" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Address Line 1"
+        android:ems="10"
+        android:id="@+id/address1"
+        android:layout_gravity="center_horizontal" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Address Line 2"
+        android:ems="10"
+        android:id="@+id/address2"
+        android:layout_gravity="center_horizontal" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Postcode"
+        android:ems="10"
+        android:id="@+id/address3"
+        android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please enter Date of Birth"
+        android:id="@+id/textView11"
+        android:layout_marginTop="30dp"
+        android:textSize="25dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/date_layout">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/selectDateButton"
+            android:text="Select Date"
+            android:onClick="showDatePickerDialog"
+            android:layout_gravity="center" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/yearText"
+            android:layout_gravity="center" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:layout_gravity="center" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/monthText"
+            android:layout_gravity="center" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:layout_gravity="center" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dayText"
+            android:layout_gravity="center" />
+
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_fwd"
+            android:text="NEXT"
+            android:textSize="25sp"
+            android:focusableInTouchMode="true"
+            android:stateListAnimator="@null"
+            android:drawableEnd="@drawable/ic_fwd_btn"
+            android:onClick="nextActivity"
+            android:layout_gravity="right"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+</LinearLayout>

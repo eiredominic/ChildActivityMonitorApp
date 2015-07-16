@@ -30,11 +30,31 @@
         <item>Parent</item>
         <item>Minder</item>
         <item>Child</item>
+    </string-array>
+
+    <string-array name="record_types">
+        <item>Changing</item>
+        <item>Feeding</item>
+        <item>Sleeping</item>
+        <item>Medication</item>
+        <item>Comments</item>
+        <item>Incidents</item>
 
     </string-array>
+
+    <string-array name="changing_types">
+        <item>Wet</item>
+        <item>Solid</item>
+    </string-array>
+
     <string name="title_activity_register_three">RegisterThreeActivity</string>
     <string name="title_activity_register_four">RegisterFourActivity</string>
     <string name="title_activity_register_five">RegisterFiveActivity</string>
+    <string name="title_activity_main_parent_home">MainParentHome</string>
+    <string name="title_activity_dialog">DialogActivity</string>
+    <string name="title_activity_add_record">AddRecordActivity</string>
 
+    <string name="date">%1$s-%2$s-%3$s</string>
+    <string name="time">%1$s:%2$s</string>
 
 </resources>

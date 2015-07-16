@@ -18,6 +18,8 @@ public class RegisterTwoActivity extends Activity {
     String unique_id;
     String account_type;
     String name;
+    String date;
+    String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,11 @@ public class RegisterTwoActivity extends Activity {
         Intent intent = getIntent();
         account_type = intent.getStringExtra("account_type");
         name = intent.getStringExtra("name");
+        name = intent.getStringExtra("dob");
 
+        if (account_type.equals("Parent")) {
+            address = intent.getStringExtra("address");
+        }
 
     }
 
@@ -41,10 +47,20 @@ public class RegisterTwoActivity extends Activity {
     /** Called when the user clicks the Next button */
     public void nextActivity(View view) {
         unique_id = uniqueIdTxt.getText().toString();
+        Intent intent;
+        if (account_type.equals("Child")) {
+            intent = new Intent(this, RegisterFourActivity.class);
+        }
+        else {
+            intent = new Intent(this, RegisterThreeActivity.class);
+        }
 
-        Intent intent = new Intent(this, RegisterThreeActivity.class);
+        if (account_type.equals("Parent")) {
+            intent.putExtra("address", address);
+        }
         intent.putExtra("account_type", account_type);
         intent.putExtra("name", name);
+        intent.putExtra("dob", date);
         intent.putExtra("unique_id", unique_id);
         startActivity(intent);
     }

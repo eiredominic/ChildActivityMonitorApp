@@ -15,7 +15,8 @@ public class RegisterThreeActivity extends Activity {
     String account_type;
     String unique_id;
     String name;
-
+    String date;
+    String address;
     EditText emailAddressTxt;
     EditText emailAddressTxtRepeat;
     String email_address;
@@ -33,7 +34,10 @@ public class RegisterThreeActivity extends Activity {
         account_type = intent.getStringExtra("account_type");
         name = intent.getStringExtra("name");
         unique_id = intent.getStringExtra("unique_id");
-
+        date = intent.getStringExtra("dob");
+        if (account_type.equals("Parent")) {
+            address = intent.getStringExtra("address");
+        }
 
     }
     public boolean emailCheck() {
@@ -47,8 +51,6 @@ public class RegisterThreeActivity extends Activity {
             emailMatch = true;
         }
         return emailMatch;
-
-
     }
 
     /** Called when the user clicks the Prev button */
@@ -56,7 +58,10 @@ public class RegisterThreeActivity extends Activity {
         Intent intent = new Intent(this, RegisterTwoActivity.class);
         intent.putExtra("account_type", account_type);
         intent.putExtra("name", name);
-
+        intent.putExtra("dob", date);
+        if (account_type.equals("Parent")) {
+            intent.putExtra("address", address);
+        }
         startActivity(intent);
 
     }
@@ -70,7 +75,10 @@ public class RegisterThreeActivity extends Activity {
             intent.putExtra("unique_id", unique_id);
             intent.putExtra("email_address", email_address);
             intent.putExtra("name", name);
-
+            intent.putExtra("dob", date);
+            if (account_type.equals("Parent")) {
+                intent.putExtra("address", address);
+            }
             startActivity(intent);
 
         }

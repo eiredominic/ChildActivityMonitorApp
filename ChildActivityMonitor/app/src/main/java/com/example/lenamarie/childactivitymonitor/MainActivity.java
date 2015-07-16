@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 //import com.example.lenamarie.childactivitymonitor.MinderTabs.MinderActivityWrapper;
+import com.example.lenamarie.childactivitymonitor.MinderTabs.NavigationDrawer.MainMinderActivity;
 import com.example.lenamarie.childactivitymonitor.ParentTabs.NavigationDrawer.MainParentActivity;
 import com.example.lenamarie.childactivitymonitor.Register.RegisterOneActivity;
 //import com.example.lenamarie.childactivitymonitor.ParentTabs.ParentActivityWrapper;
@@ -42,7 +43,6 @@ public class MainActivity extends Activity {
     EditText pwdText;
     Button btnLogin;
     Button btnRegister;
-    TextView loginConfirm;
 
     public void setPreferences() {
         SharedPreferences sharedprefs = getSharedPreferences("loginpreferences", Context.MODE_PRIVATE);
@@ -197,11 +197,12 @@ public class MainActivity extends Activity {
             if (type != null) {
                 if (type.toString().equals("Parent")) {
                     Intent intent = new Intent(MainActivity.this, MainParentActivity.class);
+
                     startActivity(intent);
-                }//else if (type.toString().equals("Minder")) {
-                  //  Intent intent = new Intent(MainActivity.this, MinderActivityWrapper.class);
-                  //  startActivity(intent);
-                //}
+                }else if (type.toString().equals("Minder")) {
+                    Intent intent = new Intent(MainActivity.this, MainMinderActivity.class);
+                    startActivity(intent);
+                }
             }
         }
 
