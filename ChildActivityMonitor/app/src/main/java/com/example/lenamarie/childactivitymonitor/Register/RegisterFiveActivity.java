@@ -3,15 +3,12 @@ package com.example.lenamarie.childactivitymonitor.Register;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.lenamarie.childactivitymonitor.MainActivity;
 import com.example.lenamarie.childactivitymonitor.R;
@@ -30,12 +27,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class RegisterFiveActivity extends Activity {
-    String account_type, unique_id, name, email_address, password, date, parent_id, address;
-    TextView successTxt;
-    TextView uniqueIdTxt;
-    TextView registrationStatusTxt;
-
-    String url;
+    String account_type, unique_id, name, email_address, password, date, parent_id, address, url;
+    TextView successTxt, uniqueIdTxt, registrationStatusTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +52,7 @@ public class RegisterFiveActivity extends Activity {
                 break;
             case "Parent":
                 email_address = intent.getStringExtra("email_address");
+                address = intent.getStringExtra("address");
                 url = "https://mkbdesigncouk.ipage.com/monitoractivity/register_parent.php";
                 break;
             case "Child":
@@ -71,7 +65,6 @@ public class RegisterFiveActivity extends Activity {
     }
     /** Called when the user clicks the Send button */
     public void nextActivity(View view) {
-
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -130,15 +123,15 @@ public class RegisterFiveActivity extends Activity {
                 writer.append("name=").append(URLEncoder.encode(name, "UTF-8")).append("&");
                 writer.append("password=").append(URLEncoder.encode(password, "UTF-8")).append("&");
                 writer.append("dob=").append(URLEncoder.encode(date, "UTF-8")).append("&");
-                writer.append("type=").append(URLEncoder.encode(account_type, "UTF-8"));
-                writer.append("linked_id=").append(URLEncoder.encode(parent_id, "UTF-8"));
+                writer.append("type=").append(URLEncoder.encode(account_type, "UTF-8")).append("&");
+                writer.append("parent_id=").append(URLEncoder.encode(parent_id, "UTF-8"));
             }
             if (account_type.equals("Parent")) {
                 writer.append("unique_id=").append(URLEncoder.encode(unique_id, "UTF-8")).append("&");
                 writer.append("name=").append(URLEncoder.encode(name, "UTF-8")).append("&");
                 writer.append("password=").append(URLEncoder.encode(password, "UTF-8")).append("&");
                 writer.append("email=").append(URLEncoder.encode(email_address, "UTF-8")).append("&");
-                writer.append("dob=").append(URLEncoder.encode(email_address, "UTF-8")).append("&");
+                writer.append("dob=").append(URLEncoder.encode(date, "UTF-8")).append("&");
                 writer.append("address=").append(URLEncoder.encode(address, "UTF-8")).append("&");
                 writer.append("type=").append(URLEncoder.encode(account_type, "UTF-8"));
             }
@@ -146,7 +139,7 @@ public class RegisterFiveActivity extends Activity {
                 writer.append("unique_id=").append(URLEncoder.encode(unique_id, "UTF-8")).append("&");
                 writer.append("name=").append(URLEncoder.encode(name, "UTF-8")).append("&");
                 writer.append("password=").append(URLEncoder.encode(password, "UTF-8")).append("&");
-                writer.append("dob=").append(URLEncoder.encode(email_address, "UTF-8")).append("&");
+                writer.append("dob=").append(URLEncoder.encode(date, "UTF-8")).append("&");
                 writer.append("email=").append(URLEncoder.encode(email_address, "UTF-8")).append("&");
                 writer.append("type=").append(URLEncoder.encode(account_type, "UTF-8"));
             }
@@ -213,9 +206,15 @@ public class RegisterFiveActivity extends Activity {
             }
 
             if (aJsonString.equals("0")){
-                registrationStatusTxt.setText("Registration Successful!");
-                successTxt.setText("Your unique ID is " + unique_id + ". Please keep this for " +
-                        "your records as you will need it to logon");
+                if (account_type.equals("Child")) {
+                    registrationStatusTxt.setText("Registration Successful!");
+                    successTxt.setText("Unique ID for child is " + unique_id);
+                }
+                else {
+                    registrationStatusTxt.setText("Registration Successful!");
+                    successTxt.setText("Your unique ID is " + unique_id + ". Please keep this for " +
+                            "your records as you will need it to logon");
+                }
             }
             else {
                 registrationStatusTxt.setText("There has been a problem with your registration." +

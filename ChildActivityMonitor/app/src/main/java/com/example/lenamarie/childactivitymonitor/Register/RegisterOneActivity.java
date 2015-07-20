@@ -1,6 +1,5 @@
 package com.example.lenamarie.childactivitymonitor.Register;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -16,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lenamarie.childactivitymonitor.R;
 
@@ -26,6 +26,8 @@ public class RegisterOneActivity extends FragmentActivity {
     EditText nameTxt, address1, address2, address3;
     LinearLayout addressLayout;
     TextView yearText, monthText, dayText, btn_fwd;
+    RadioButton minderButton, parentButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,10 @@ public class RegisterOneActivity extends FragmentActivity {
         yearText = (TextView)findViewById(R.id.yearText);
         monthText = (TextView)findViewById(R.id.monthText);
         dayText = (TextView)findViewById(R.id.dayText);
+
+        minderButton = (RadioButton) findViewById(R.id.radioBtn_minder);
+        parentButton = (RadioButton) findViewById(R.id.radioBtn_parent);
+
     }
 
     public void onRadioButtonClicked(View view) {
@@ -63,14 +69,48 @@ public class RegisterOneActivity extends FragmentActivity {
     }
     /** Called when the user clicks the Send button */
     public void nextActivity(View view) {
+
+        // check if fields have been left empty //
+        if (!minderButton.isChecked() && !parentButton.isChecked()) {
+            Toast.makeText(getApplicationContext(), "Please select a Minder or Parent account",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (nameTxt.getText().toString().isEmpty())   {
+            Toast.makeText(getApplicationContext(), "Please enter a name",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (account_type.equals("Parent")) {
+            if (address1.getText().toString().isEmpty() || address3.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(), "Please enter a value in Address Line 1 " +
+                                "and Postcode",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        if (yearText.getText().toString().isEmpty() || monthText.getText().toString().isEmpty() ||
+                dayText.getText().toString().isEmpty() ) {
+            Toast.makeText(getApplicationContext(), "Please enter a date of birth",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        // push text in fields to intent so that next activity can access them
+
         name = nameTxt.getText().toString();
         Resources res = getResources();
         String date = String.format(res.getString(R.string.date),yearText.getText().toString(),
                 monthText.getText().toString(), dayText.getText().toString());
 
         if (account_type.equals("Parent")) {
-            if (!address2.getText().equals("")) {
-                address = "" + address1.getText() + ", " + address2.getText() + ", " + address3.getText();
+            if (!address2.getText().toString().isEmpty()) {
+                address = "" + address1.getText() + ", " + address2.getText() + ", " +
+                        address3.getText();
             }
             else {
                 address = "" + address1.getText() +", " + address3.getText();

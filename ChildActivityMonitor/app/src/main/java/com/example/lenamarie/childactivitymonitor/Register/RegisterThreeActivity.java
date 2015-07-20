@@ -12,22 +12,14 @@ import android.widget.Toast;
 import com.example.lenamarie.childactivitymonitor.R;
 
 public class RegisterThreeActivity extends Activity {
-    String account_type;
-    String unique_id;
-    String name;
-    String date;
-    String address;
-    EditText emailAddressTxt;
-    EditText emailAddressTxtRepeat;
-    String email_address;
-    String email_address_repeat;
-
+    String account_type, unique_id, name, date, address, email_address, email_address_repeat;
+    EditText emailAddressTxt, emailAddressTxtRepeat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_three);
 
-        emailAddressTxt = (EditText) findViewById(R.id.passwordTxt);
+        emailAddressTxt = (EditText) findViewById(R.id.emailTxt);
         emailAddressTxtRepeat = (EditText) findViewById(R.id.emailTxtRepeat);
 
         Intent intent = getIntent();
@@ -68,6 +60,12 @@ public class RegisterThreeActivity extends Activity {
 
     /** Called when the user clicks the Next button */
     public void nextActivity(View view) {
+
+        if (emailAddressTxt.getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please enter an email address",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (emailCheck()) {
 
             Intent intent = new Intent(this, RegisterFourActivity.class);

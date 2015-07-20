@@ -9,17 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lenamarie.childactivitymonitor.R;
 
 public class RegisterTwoActivity extends Activity {
 
     EditText uniqueIdTxt;
-    String unique_id;
-    String account_type;
-    String name;
-    String date;
-    String address;
+    String unique_id, account_type, name, date, address, parent_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +27,14 @@ public class RegisterTwoActivity extends Activity {
         Intent intent = getIntent();
         account_type = intent.getStringExtra("account_type");
         name = intent.getStringExtra("name");
-        name = intent.getStringExtra("dob");
+        date = intent.getStringExtra("dob");
 
         if (account_type.equals("Parent")) {
             address = intent.getStringExtra("address");
         }
-
+        if (account_type.equals("Child")) {
+            parent_id = intent.getStringExtra("parent_id");
+        }
     }
 
     /** Called when the user clicks the Prev button */
@@ -46,10 +45,18 @@ public class RegisterTwoActivity extends Activity {
 
     /** Called when the user clicks the Next button */
     public void nextActivity(View view) {
+
+        if (uniqueIdTxt.getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please enter a unique id",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         unique_id = uniqueIdTxt.getText().toString();
         Intent intent;
         if (account_type.equals("Child")) {
             intent = new Intent(this, RegisterFourActivity.class);
+            intent.putExtra("parent_id", parent_id);
         }
         else {
             intent = new Intent(this, RegisterThreeActivity.class);

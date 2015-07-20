@@ -15,6 +15,11 @@
         <activity
             android:name=".MainActivity"
             android:label="title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ParentTabs.NavigationDrawer.MainParentActivity"
@@ -23,15 +28,15 @@
         <activity
             android:name=".MinderTabs.NavigationDrawer.MainMinderActivity"
             android:label="Minder Menu" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Register.RegisterOneActivity"
             android:label="@string/title_activity_register_one" >
+        </activity>
+        <activity
+            android:name=".Register.RegisterOneActivityChild"
+            android:label="Register Child" >
         </activity>
         <activity
             android:name=".Register.RegisterTwoActivity"
@@ -48,10 +53,6 @@
         <activity
             android:name=".Register.RegisterFiveActivity"
             android:label="@string/title_activity_register_five" >
-        </activity>
-        <activity
-            android:name=".MainParentHome"
-            android:label="@string/title_activity_main_parent_home" >
         </activity>
         <activity
             android:name=".Other.AddRecordActivity"

@@ -46,7 +46,7 @@
 <LinearLayout android:id="@+id/layout"
     android:layout_width="wrap_content"
     android:layout_height="388dp">
-    <ListView android:id="@+id/feedingView"
+    <ListView android:id="@+id/medicationView"
         android:layout_height="612dp"
         android:layout_width="fill_parent">
     </ListView>

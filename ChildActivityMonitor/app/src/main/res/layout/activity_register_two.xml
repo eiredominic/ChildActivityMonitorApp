@@ -18,9 +18,11 @@
         android:layout_marginBottom="51dp" />
 
     <EditText
-        android:layout_width="200dip"
-        android:layout_height="40dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="15"
         android:id="@+id/uniqueIdTxt"
+        android:inputType="textVisiblePassword|textNoSuggestions"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 

@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.example.lenamarie.childactivitymonitor.ParentTabs.ChangingTab;
 import com.example.lenamarie.childactivitymonitor.ParentTabs.CommentsTab;
@@ -44,6 +44,7 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
 
     String child_id;
     private NavigationInteraction mNavigationInteraction;
+    String currentTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,49 +87,65 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
 
         switch (position) {
             case 0:
-
+                currentTab = "Changing";
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new ChangingTab(), "Changing")
                         .commit();
+                if(child_id != null && !child_id.isEmpty()) {
+                    new DownloadWebpageTask().execute("https://mkbdesigncouk.ipage.com/monitoractivity/view_changing_details.php");
+                }
                 break;
             case 1:
-
+                currentTab = "Feeding";
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new FeedingTab(), "Feeding")
                         .commit();
+                if(child_id != null && !child_id.isEmpty()) {
+                    new DownloadWebpageTask().execute("https://mkbdesigncouk.ipage.com/monitoractivity/view_feeding_details.php");
+                }
                 break;
             case 2:
-
+                currentTab = "Sleeping";
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new SleepingTab(), "Sleeping")
                         .commit();
+                if(child_id != null && !child_id.isEmpty()) {
+                    new DownloadWebpageTask().execute("https://mkbdesigncouk.ipage.com/monitoractivity/view_sleeping_details.php");
+                }
                 break;
             case 3:
-
+                currentTab = "Medication";
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new MedicationTab(), "Medication")
                         .commit();
+                if(child_id != null && !child_id.isEmpty()) {
+                    new DownloadWebpageTask().execute("https://mkbdesigncouk.ipage.com/monitoractivity/view_medication_details.php");
+                }
                 break;
             case 4:
-
+                currentTab = "Incidents";
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new IncidentsTab(), "Incidents")
                         .commit();
+                if(child_id != null && !child_id.isEmpty()) {
+                    new DownloadWebpageTask().execute("https://mkbdesigncouk.ipage.com/monitoractivity/view_incident_details.php");
+                }
                 break;
             case 5:
-
+                currentTab = "Comments";
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new CommentsTab(), "Comments")
                         .commit();
+                if(child_id != null && !child_id.isEmpty()) {
+                    new DownloadWebpageTask().execute("https://mkbdesigncouk.ipage.com/monitoractivity/view_comment_details.php");
+                }
                 break;
         }
-
 
 
     }
 
     private static final String DEBUG_TAG = "HTTP POST";
-
 
 
     // Given a URL, establishes an HttpUrlConnection and retrieves
@@ -146,7 +163,6 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
             conn.setConnectTimeout(15000 /* milliseconds */);
             conn.setRequestMethod("POST");
             conn.setDoInput(true);
-
 
 
             // Starts the query
@@ -197,34 +213,76 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
             try {
                 return downloadUrl(urls[0]);
             } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
+                Toast.makeText(getApplicationContext(), "Could not connect to server",
+                        Toast.LENGTH_SHORT).show();
+                return "Unable to reach server";
             }
         }
+
+
+
+
+
         // onPostExecute displays the results of the AsyncTask.
         @Override
-        protected void onPostExecute(String result)
-            {
-                JSONArray aJsonArray = null;
+        protected void onPostExecute(String result) {
+            JSONArray jArray = null;
+            JSONObject jsonObject = null;
+
+            try {
+                jArray = new JSONArray(result);
+            } catch (JSONException e) {
+                //no records found
+            }
+
+            assert jArray != null;
+            if (!jArray.isNull(0)) {
                 try {
-                    aJsonArray = new JSONArray(result);
+                    jsonObject = jArray.getJSONObject(0);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
                 try {
-                    initList(aJsonArray);
+                    if (jsonObject.getString("success_msg").equals("1")) {
+                        Toast.makeText(getApplicationContext(), "No records found",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        switch (getCurrentTab()) {
+                            case "Feeding":
+                                initFeedingList(jArray);
+                                break;
+                            case "Changing":
+                                initChangingList(jArray);
+                                break;
+                            case "Medication":
+                                initMedicationList(jArray);
+                                break;
+                            case "Incidents":
+                                initIncidentList(jArray);
+                                break;
+                            case "Sleeping":
+                                initSleepingList(jArray);
+                                break;
+                            case "Comments":
+                                initCommentList(jArray);
+                                break;
+                        }
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
             }
 
+        }
     }
 
-    public void initList(JSONArray jsonarray) throws JSONException {
-        Fragment feedingFragment = getSupportFragmentManager().findFragmentByTag("Feeding");
-        if (feedingFragment != null && feedingFragment.isVisible()) {
+        public String getCurrentTab() {
+            return this.currentTab;
+        }
+
+        public void initFeedingList(JSONArray jsonarray) throws JSONException {
 
             ListView feedingList = (ListView) findViewById(R.id.feedingView);
 
@@ -241,9 +299,9 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
                 map.put("ref", "" + jobj.getString("ref"));
                 map.put("minderid", "" + jobj.getString("minderid"));
                 map.put("childid", "" + jobj.getString("childid"));
-                map.put("amount", "Amount: " + jobj.getString("amount"));
-                map.put("date", "Date: " + jobj.getString("date"));
-                map.put("time", "Time: " + jobj.getString("time"));
+                map.put("amount", "" + jobj.getString("amount"));
+                map.put("date", "" + jobj.getString("date"));
+                map.put("time", "" + jobj.getString("time"));
                 mylist.add(map);
             }
 
@@ -251,6 +309,147 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
             SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.adapter_feeding_list, from, to);
 
             feedingList.setAdapter(adapter);
+
+            }
+        public void initChangingList(JSONArray jsonarray) throws JSONException {
+                ListView changingList = (ListView) findViewById(R.id.changingView);
+
+                ArrayList<HashMap<String, String>> mylist = new ArrayList<>();
+
+                String[] from = new String[]{"ref", "minderid", "childid", "amount", "date", "time"};
+                int[] to = new int[]{R.id.item1, R.id.item2, R.id.item3, R.id.item4, R.id.item5, R.id.item6};
+
+                for (int i = 0; i < jsonarray.length(); i++) {
+                    HashMap<String, String> map = new HashMap<>();
+
+                    JSONObject jobj = jsonarray.getJSONObject(i);
+
+                    map.put("ref", "" + jobj.getString("ref"));
+                    map.put("minderid", "" + jobj.getString("minderid"));
+                    map.put("childid", "" + jobj.getString("childid"));
+                    map.put("type", "" + jobj.getString("type"));
+                    map.put("date", "" + jobj.getString("date"));
+                    map.put("time", "" + jobj.getString("time"));
+                    mylist.add(map);
+                }
+
+
+                SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.adapter_changing_list, from, to);
+
+                changingList.setAdapter(adapter);
+            }
+        public void initMedicationList(JSONArray jsonarray) throws JSONException {
+
+                ListView medicationList = (ListView) findViewById(R.id.medicationView);
+
+                ArrayList<HashMap<String, String>> mylist = new ArrayList<>();
+
+                String[] from = new String[]{"ref", "minderid", "childid", "amount", "date", "time"};
+                int[] to = new int[]{R.id.item1, R.id.item2, R.id.item3, R.id.item4, R.id.item5, R.id.item6};
+
+                for (int i = 0; i < jsonarray.length(); i++) {
+                    HashMap<String, String> map = new HashMap<>();
+
+                    JSONObject jobj = jsonarray.getJSONObject(i);
+
+                    map.put("ref", "" + jobj.getString("ref"));
+                    map.put("minderid", "" + jobj.getString("minderid"));
+                    map.put("childid", "" + jobj.getString("childid"));
+                    map.put("amount", "" + jobj.getString("amount"));
+                    map.put("date", "" + jobj.getString("date"));
+                    map.put("time", "" + jobj.getString("time"));
+                    mylist.add(map);
+                }
+
+
+                SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.adapter_medication_list, from, to);
+
+                medicationList.setAdapter(adapter);
+            }
+        public void initIncidentList(JSONArray jsonarray) throws JSONException {
+
+                ListView feedingList = (ListView) findViewById(R.id.feedingView);
+
+                ArrayList<HashMap<String, String>> mylist = new ArrayList<>();
+
+                String[] from = new String[]{"ref", "minderid", "childid", "amount", "date", "time"};
+                int[] to = new int[]{R.id.item1, R.id.item2, R.id.item3, R.id.item4, R.id.item5, R.id.item6};
+
+                for (int i = 0; i < jsonarray.length(); i++) {
+                    HashMap<String, String> map = new HashMap<>();
+
+                    JSONObject jobj = jsonarray.getJSONObject(i);
+
+                    map.put("ref", "" + jobj.getString("ref"));
+                    map.put("minderid", "" + jobj.getString("minderid"));
+                    map.put("childid", "" + jobj.getString("childid"));
+                    map.put("amount", "" + jobj.getString("amount"));
+                    map.put("date", "" + jobj.getString("date"));
+                    map.put("time", "" + jobj.getString("time"));
+                    mylist.add(map);
+                }
+
+
+                SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.adapter_feeding_list, from, to);
+
+                feedingList.setAdapter(adapter);
+            }
+        public void initSleepingList(JSONArray jsonarray) throws JSONException {
+
+                ListView feedingList = (ListView) findViewById(R.id.feedingView);
+
+                ArrayList<HashMap<String, String>> mylist = new ArrayList<>();
+
+                String[] from = new String[]{"ref", "minderid", "childid", "amount", "date", "time"};
+                int[] to = new int[]{R.id.item1, R.id.item2, R.id.item3, R.id.item4, R.id.item5, R.id.item6};
+
+                for (int i = 0; i < jsonarray.length(); i++) {
+                    HashMap<String, String> map = new HashMap<>();
+
+                    JSONObject jobj = jsonarray.getJSONObject(i);
+
+                    map.put("ref", "" + jobj.getString("ref"));
+                    map.put("minderid", "" + jobj.getString("minderid"));
+                    map.put("childid", "" + jobj.getString("childid"));
+                    map.put("amount", "" + jobj.getString("amount"));
+                    map.put("date", "" + jobj.getString("date"));
+                    map.put("time", "" + jobj.getString("time"));
+                    mylist.add(map);
+                }
+
+
+                SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.adapter_feeding_list, from, to);
+
+                feedingList.setAdapter(adapter);
+            }
+        public void initCommentList(JSONArray jsonarray) throws JSONException {
+
+        ListView feedingList = (ListView) findViewById(R.id.feedingView);
+
+        ArrayList<HashMap<String, String>> mylist = new ArrayList<>();
+
+        String[] from = new String[]{"ref", "minderid", "childid", "amount", "date", "time"};
+        int[] to = new int[]{R.id.item1, R.id.item2, R.id.item3, R.id.item4, R.id.item5, R.id.item6};
+
+        for (int i = 0; i < jsonarray.length(); i++) {
+            HashMap<String, String> map = new HashMap<>();
+
+            JSONObject jobj = jsonarray.getJSONObject(i);
+
+            map.put("ref", "" + jobj.getString("ref"));
+            map.put("minderid", "" + jobj.getString("minderid"));
+            map.put("childid", "" + jobj.getString("childid"));
+            map.put("amount", "" + jobj.getString("amount"));
+            map.put("date", "" + jobj.getString("date"));
+            map.put("time", "" + jobj.getString("time"));
+            mylist.add(map);
         }
+
+
+        SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.adapter_feeding_list, from, to);
+
+        feedingList.setAdapter(adapter);
     }
+
 }
+

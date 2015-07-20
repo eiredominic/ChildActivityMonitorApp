@@ -71,8 +71,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
+        android:hint="Name"
+        android:ems="15"
         android:id="@+id/nameTxt"
         android:layout_gravity="center_horizontal" />
 
@@ -84,13 +84,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/addressLayout"
-    android:visibility="gone"
-    tools:context="com.example.lenamarie.childactivitymonitor.Register.RegisterOneActivity">
+    tools:context="com.example.lenamarie.childactivitymonitor.Register.RegisterOneActivity"
+    android:visibility="gone">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please enter home address"
-        android:id="@+id/textView9"
         android:layout_marginTop="28dp"
         android:textSize="25dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -99,21 +98,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Address Line 1"
-        android:ems="10"
+        android:ems="15"
         android:id="@+id/address1"
         android:layout_gravity="center_horizontal" />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Address Line 2"
-        android:ems="10"
+        android:ems="15"
         android:id="@+id/address2"
         android:layout_gravity="center_horizontal" />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Postcode"
-        android:ems="10"
+        android:ems="15"
         android:id="@+id/address3"
         android:layout_gravity="center_horizontal" />
     </LinearLayout>
@@ -122,7 +121,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please enter Date of Birth"
-        android:id="@+id/textView11"
         android:layout_marginTop="30dp"
         android:textSize="25dp"
         android:textAppearance="?android:attr/textAppearanceLarge"

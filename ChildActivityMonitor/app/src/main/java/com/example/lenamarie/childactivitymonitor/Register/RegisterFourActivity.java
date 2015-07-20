@@ -12,17 +12,8 @@ import android.widget.Toast;
 import com.example.lenamarie.childactivitymonitor.R;
 
 public class RegisterFourActivity extends Activity {
-    String account_type;
-    String unique_id;
-    String name;
-    String date;
-    String email_address;
-    String password;
-    String passwordRepeat;
-    String address;
-
-    EditText passwordTxt;
-    EditText passwordTxtRepeat;
+    String account_type, unique_id, name, date, email_address, password, passwordRepeat, address, parent_id;
+    EditText passwordTxt, passwordTxtRepeat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +33,9 @@ public class RegisterFourActivity extends Activity {
         if (account_type.equals("Parent")) {
             address = intent.getStringExtra("address");
         }
+        if (account_type.equals("Child")) {
+            parent_id = intent.getStringExtra("parent_id");
+        }
 
     }
     public boolean passwordCheck() {
@@ -53,7 +47,6 @@ public class RegisterFourActivity extends Activity {
         if (password.equals(passwordRepeat)) {
             passwordMatch = true;
         }
-
         return passwordMatch;
     }
 
@@ -63,15 +56,18 @@ public class RegisterFourActivity extends Activity {
 
         if (account_type.equals("Child")) {
             intent = new Intent(this, RegisterTwoActivity.class);
-
+            intent.putExtra("parent_id", parent_id);
         }
         else {
             intent = new Intent(this, RegisterThreeActivity.class);
+            intent.putExtra("unique_id", unique_id);
         }
+
         intent.putExtra("account_type", account_type);
-        intent.putExtra("unique_id", unique_id);
         intent.putExtra("name", name);
         intent.putExtra("dob", date);
+        intent.putExtra("email_address", email_address);
+
         if (account_type.equals("Parent")) {
             intent.putExtra("address", address);
         }
@@ -80,6 +76,17 @@ public class RegisterFourActivity extends Activity {
     }
     /** Called when the user clicks the Send button */
     public void nextActivity(View view) {
+        if (passwordTxt.getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please enter an email address",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (passwordTxt.getText().toString().length() < 6) {
+            Toast.makeText(getApplicationContext(), "Password should be at least 6 characters",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (passwordCheck()) {
 
             Intent intent = new Intent(this, RegisterFiveActivity.class);
@@ -88,12 +95,15 @@ public class RegisterFourActivity extends Activity {
             intent.putExtra("name", name);
             intent.putExtra("dob", date);
             intent.putExtra("password", password);
-            if (!account_type.equals("Child")) {
-                intent.putExtra("email_address", email_address);
+            intent.putExtra("email_address", email_address);
+
+            if (account_type.equals("Child")) {
+                intent.putExtra("parent_id", parent_id);
             }
             if (account_type.equals("Parent")) {
                 intent.putExtra("address", address);
             }
+
             startActivity(intent);
 
         }
