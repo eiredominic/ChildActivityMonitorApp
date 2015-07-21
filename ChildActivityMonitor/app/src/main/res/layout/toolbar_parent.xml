@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:minHeight="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_record_btn"
+        android:drawableEnd="@drawable/ic_add_white_36dp"
+        android:onClick="addChild"
+        android:focusableInTouchMode="true"
+        android:layout_gravity="end"
+        />
+
+    </android.support.v7.widget.Toolbar>
+
