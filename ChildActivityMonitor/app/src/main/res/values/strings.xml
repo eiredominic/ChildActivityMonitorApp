@@ -41,6 +41,11 @@
         <item>Incidents</item>
 
     </string-array>
+    <string-array name="foodAmountArray">
+        <item>No food</item>
+        <item>Half Meal</item>
+        <item>Full Meal</item>
+    </string-array>
 
     <string-array name="changing_types">
         <item>Wet</item>
@@ -56,5 +61,6 @@
 
     <string name="date">%1$s-%2$s-%3$s</string>
     <string name="time">%1$s:%2$s</string>
+    <string name="title_activity_change_child_id">changeChildId</string>
 
 </resources>

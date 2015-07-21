@@ -28,25 +28,26 @@
             android:width="100dip"
             android:height="30dip"
             />
-        <TextView android:id="@+id/item2"
-            android:layout_height="fill_parent"
-            android:layout_width="wrap_content"
-            android:text="Type"
-            android:width="100dip"
-            android:height="30dip"
-            />
 
-        <TextView android:id="@+id/item3"
+
+        <TextView android:id="@+id/item2"
             android:layout_height="fill_parent"
             android:layout_width="wrap_content"
             android:text="ChildID"
             android:width="100dip"
             android:height="30dip"
             />
-        <TextView android:id="@+id/item4"
+        <TextView android:id="@+id/item3"
             android:layout_height="fill_parent"
             android:layout_width="wrap_content"
             android:text="MinderID"
+            android:width="100dip"
+            android:height="30dip"
+            />
+        <TextView android:id="@+id/item4"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:text="Type"
             android:width="100dip"
             android:height="30dip"
             />

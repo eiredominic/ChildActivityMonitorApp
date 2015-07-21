@@ -10,39 +10,33 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <TextView android:id="@+id/item1"
-        android:text="Ref"
         android:layout_height="fill_parent"
         android:layout_width="wrap_content"
         android:width="100dip"
         />
     <TextView android:id="@+id/item2"
-        android:text="Child"
         android:layout_height="fill_parent"
         android:layout_width="wrap_content"
         android:width="100dip"
         />
     <TextView android:id="@+id/item3"
-        android:text="Minder"
         android:layout_height="fill_parent"
         android:layout_width="wrap_content"
         android:width="100dip"
         />
     <TextView android:id="@+id/item4"
-        android:text="Amount"
         android:layout_height="fill_parent"
         android:layout_width="wrap_content"
         android:width="100dip"
         />
 
     <TextView android:id="@+id/item5"
-        android:text="Date"
         android:layout_height="fill_parent"
         android:layout_width="wrap_content"
         android:width="100dip"
         />
 
     <TextView android:id="@+id/item6"
-        android:text="Time"
         android:layout_height="fill_parent"
         android:layout_width="wrap_content"
         android:width="100dip"

@@ -28,7 +28,6 @@
         <activity
             android:name=".MinderTabs.NavigationDrawer.MainMinderActivity"
             android:label="Minder Menu" >
-
         </activity>
         <activity
             android:name=".Register.RegisterOneActivity"
@@ -57,6 +56,11 @@
         <activity
             android:name=".Other.AddRecordActivity"
             android:label="@string/title_activity_add_record"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name=".Other.changeChildId"
+            android:label="@string/title_activity_change_child_id"
             android:theme="@android:style/Theme.Dialog">
         </activity>
     </application>

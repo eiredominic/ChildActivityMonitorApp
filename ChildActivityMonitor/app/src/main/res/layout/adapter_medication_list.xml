@@ -4,22 +4,38 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <TextView android:id="@+id/item1"
-        android:text="ref"
         android:layout_height="fill_parent"
         android:layout_width="wrap_content"
         android:width="100dip"
         />
     <TextView android:id="@+id/item2"
-        android:text="child"
         android:layout_height="fill_parent"
         android:layout_width="wrap_content"
         android:width="100dip"
         />
     <TextView android:id="@+id/item3"
-        android:text="minder"
         android:layout_height="fill_parent"
         android:layout_width="wrap_content"
         android:width="100dip"
         />
-
+    <TextView android:id="@+id/item4"
+        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:width="100dip"
+        />
+    <TextView android:id="@+id/item5"
+        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:width="100dip"
+        />
+    <TextView android:id="@+id/item6"
+        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:width="100dip"
+        />
+    <TextView android:id="@+id/item7"
+        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:width="100dip"
+        />
 </LinearLayout>

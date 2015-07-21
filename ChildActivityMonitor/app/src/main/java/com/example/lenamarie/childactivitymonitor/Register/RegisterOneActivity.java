@@ -150,8 +150,9 @@ public class RegisterOneActivity extends FragmentActivity {
             TextView monthText = (TextView) getActivity().findViewById(R.id.monthText);
             TextView dayText = (TextView) getActivity().findViewById(R.id.dayText);
 
+
             yearText.setText(Integer.toString(year));
-            monthText.setText(Integer.toString(month));
+            monthText.setText(Integer.toString(month + 1));
             dayText.setText(Integer.toString(day));
         }
 

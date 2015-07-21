@@ -189,6 +189,7 @@ public class MainActivity extends Activity {
             String message;
             String type;
             String success;
+            String child_id;
 
             try {
                 jObject = new JSONObject(result);
@@ -209,14 +210,18 @@ public class MainActivity extends Activity {
                     // fetch the type of user this is and add it to shared preferences before
                     // logging the user on
                     if (type.equals("Parent")) {
-                        editor.putString("parent_id", uniqueId.getText().toString());
                         intent = new Intent(MainActivity.this, MainParentActivity.class);
+                        if (jObject.getString("child_id") != null) {
+                            child_id = jObject.getString("child_id");
+                            intent.putExtra("child_id", child_id);
+                        }
+                        intent.putExtra("parent_id", uniqueId.getText().toString());
                     } else if (type.equals("Minder")) {
-                        editor.putString("minder_id", uniqueId.getText().toString());
                         intent = new Intent(MainActivity.this, MainMinderActivity.class);
+                        intent.putExtra("minder_id", uniqueId.getText().toString());
                     }
 
-                    editor.apply();
+                    //editor.apply();
                     // start the minder or parent activity depending on the type of user
                     startActivity(intent);
                 }

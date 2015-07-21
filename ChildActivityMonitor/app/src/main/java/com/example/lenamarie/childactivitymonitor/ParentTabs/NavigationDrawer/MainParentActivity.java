@@ -3,12 +3,12 @@ package com.example.lenamarie.childactivitymonitor.ParentTabs.NavigationDrawer;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -21,6 +21,7 @@ import com.example.lenamarie.childactivitymonitor.ParentTabs.MedicationTab;
 import com.example.lenamarie.childactivitymonitor.ParentTabs.SleepingTab;
 
 import com.example.lenamarie.childactivitymonitor.R;
+import com.example.lenamarie.childactivitymonitor.Register.RegisterOneActivityChild;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,8 +51,8 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_parent_activity);
-        Intent intent = getIntent();
-        child_id = intent.getStringExtra("child_id");
+
+
 
         mNavigationInteraction = (NavigationInteraction)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -60,6 +61,8 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Intent intent = getIntent();
+        child_id = intent.getStringExtra("child_id");
 
         // Set up the drawer.
         mNavigationInteraction.setUp(
@@ -73,6 +76,10 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
                 .commit();
     }
 
+    public void addChild (View v) {
+        Intent i = new Intent(MainParentActivity.this, RegisterOneActivityChild.class);
+        startActivity(i);
+    }
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -227,52 +234,33 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
         @Override
         protected void onPostExecute(String result) {
             JSONArray jArray = null;
-            JSONObject jsonObject = null;
+
 
             try {
                 jArray = new JSONArray(result);
+                switch (getCurrentTab()) {
+                    case "Feeding":
+                        initFeedingList(jArray);
+                        break;
+                    case "Changing":
+                        initChangingList(jArray);
+                        break;
+                    case "Medication":
+                        initMedicationList(jArray);
+                        break;
+                    case "Incidents":
+                        initIncidentList(jArray);
+                        break;
+                    case "Sleeping":
+                        initSleepingList(jArray);
+                        break;
+                    case "Comments":
+                        initCommentList(jArray);
+                        break;
+                }
             } catch (JSONException e) {
-                //no records found
-            }
-
-            assert jArray != null;
-            if (!jArray.isNull(0)) {
-                try {
-                    jsonObject = jArray.getJSONObject(0);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    if (jsonObject.getString("success_msg").equals("1")) {
-                        Toast.makeText(getApplicationContext(), "No records found",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        switch (getCurrentTab()) {
-                            case "Feeding":
-                                initFeedingList(jArray);
-                                break;
-                            case "Changing":
-                                initChangingList(jArray);
-                                break;
-                            case "Medication":
-                                initMedicationList(jArray);
-                                break;
-                            case "Incidents":
-                                initIncidentList(jArray);
-                                break;
-                            case "Sleeping":
-                                initSleepingList(jArray);
-                                break;
-                            case "Comments":
-                                initCommentList(jArray);
-                                break;
-                        }
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
+                Toast.makeText(getApplicationContext(), "No records found",
+                        Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -344,8 +332,8 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
 
                 ArrayList<HashMap<String, String>> mylist = new ArrayList<>();
 
-                String[] from = new String[]{"ref", "minderid", "childid", "amount", "date", "time"};
-                int[] to = new int[]{R.id.item1, R.id.item2, R.id.item3, R.id.item4, R.id.item5, R.id.item6};
+                String[] from = new String[]{"ref", "minderid", "childid", "medication", "amount", "date", "time"};
+                int[] to = new int[]{R.id.item1, R.id.item2, R.id.item3, R.id.item4, R.id.item5, R.id.item6, R.id.item7};
 
                 for (int i = 0; i < jsonarray.length(); i++) {
                     HashMap<String, String> map = new HashMap<>();
@@ -355,6 +343,7 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
                     map.put("ref", "" + jobj.getString("ref"));
                     map.put("minderid", "" + jobj.getString("minderid"));
                     map.put("childid", "" + jobj.getString("childid"));
+                    map.put("medication", "" + jobj.getString("medication"));
                     map.put("amount", "" + jobj.getString("amount"));
                     map.put("date", "" + jobj.getString("date"));
                     map.put("time", "" + jobj.getString("time"));
@@ -368,11 +357,11 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
             }
         public void initIncidentList(JSONArray jsonarray) throws JSONException {
 
-                ListView feedingList = (ListView) findViewById(R.id.feedingView);
+                ListView incidentList = (ListView) findViewById(R.id.incidentView);
 
                 ArrayList<HashMap<String, String>> mylist = new ArrayList<>();
 
-                String[] from = new String[]{"ref", "minderid", "childid", "amount", "date", "time"};
+                String[] from = new String[]{"ref", "minderid", "childid", "description", "date", "time"};
                 int[] to = new int[]{R.id.item1, R.id.item2, R.id.item3, R.id.item4, R.id.item5, R.id.item6};
 
                 for (int i = 0; i < jsonarray.length(); i++) {
@@ -383,20 +372,20 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
                     map.put("ref", "" + jobj.getString("ref"));
                     map.put("minderid", "" + jobj.getString("minderid"));
                     map.put("childid", "" + jobj.getString("childid"));
-                    map.put("amount", "" + jobj.getString("amount"));
+                    map.put("description", "" + jobj.getString("description"));
                     map.put("date", "" + jobj.getString("date"));
                     map.put("time", "" + jobj.getString("time"));
                     mylist.add(map);
                 }
 
 
-                SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.adapter_feeding_list, from, to);
+                SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.adapter_incidents_list, from, to);
 
-                feedingList.setAdapter(adapter);
+                incidentList.setAdapter(adapter);
             }
         public void initSleepingList(JSONArray jsonarray) throws JSONException {
 
-                ListView feedingList = (ListView) findViewById(R.id.feedingView);
+                ListView sleepingList = (ListView) findViewById(R.id.sleepingView);
 
                 ArrayList<HashMap<String, String>> mylist = new ArrayList<>();
 
@@ -418,17 +407,17 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
                 }
 
 
-                SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.adapter_feeding_list, from, to);
+                SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.adapter_sleeping_list, from, to);
 
-                feedingList.setAdapter(adapter);
+            sleepingList.setAdapter(adapter);
             }
         public void initCommentList(JSONArray jsonarray) throws JSONException {
 
-        ListView feedingList = (ListView) findViewById(R.id.feedingView);
+        ListView commentList = (ListView) findViewById(R.id.commentsView);
 
         ArrayList<HashMap<String, String>> mylist = new ArrayList<>();
 
-        String[] from = new String[]{"ref", "minderid", "childid", "amount", "date", "time"};
+        String[] from = new String[]{"ref", "minderid", "childid", "comment", "date", "time"};
         int[] to = new int[]{R.id.item1, R.id.item2, R.id.item3, R.id.item4, R.id.item5, R.id.item6};
 
         for (int i = 0; i < jsonarray.length(); i++) {
@@ -439,16 +428,16 @@ public class MainParentActivity extends AppCompatActivity implements NavigationI
             map.put("ref", "" + jobj.getString("ref"));
             map.put("minderid", "" + jobj.getString("minderid"));
             map.put("childid", "" + jobj.getString("childid"));
-            map.put("amount", "" + jobj.getString("amount"));
+            map.put("comment", "" + jobj.getString("comment"));
             map.put("date", "" + jobj.getString("date"));
             map.put("time", "" + jobj.getString("time"));
             mylist.add(map);
         }
 
 
-        SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.adapter_feeding_list, from, to);
+        SimpleAdapter adapter = new SimpleAdapter(this, mylist, R.layout.adapter_comments_list, from, to);
 
-        feedingList.setAdapter(adapter);
+            commentList.setAdapter(adapter);
     }
 
 }

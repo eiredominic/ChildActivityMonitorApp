@@ -52,6 +52,12 @@ public class RegisterTwoActivity extends Activity {
             return;
         }
 
+        if (uniqueIdTxt.getText().toString().length() < 6 || uniqueIdTxt.getText().toString().length() > 15 ) {
+            Toast.makeText(getApplicationContext(), "Unique ID should be between 6 and 15 characters",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         unique_id = uniqueIdTxt.getText().toString();
         Intent intent;
         if (account_type.equals("Child")) {
